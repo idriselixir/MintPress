@@ -1,4 +1,37 @@
+'use client';
+
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+
+// Animation variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }
+  }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { 
+    opacity: 1, 
+    scale: 1,
+    transition: { duration: 0.5 }
+  }
+};
 
 export default function Portfolio() {
   const portfolioItems = [
@@ -63,79 +96,130 @@ export default function Portfolio() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-turquoise-600 to-turquoise-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold mb-4">Our Portfolio</h1>
-          <p className="text-xl text-turquoise-100">See what we've created for our clients</p>
+          <motion.h1 
+            className="text-5xl md:text-6xl font-bold mb-4 heading-uppercase"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Our Portfolio
+          </motion.h1>
+          <motion.p 
+            className="text-xl text-turquoise-100"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            See what we've created for our clients
+          </motion.p>
         </div>
       </section>
 
       {/* Portfolio Stats */}
       <section className="py-16 bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-4xl font-bold text-turquoise-600 mb-2">500+</div>
-              <div className="text-gray-600">Projects Completed</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-turquoise-600 mb-2">200+</div>
-              <div className="text-gray-600">Happy Clients</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-turquoise-600 mb-2">1M+</div>
-              <div className="text-gray-600">Items Printed</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-turquoise-600 mb-2">10+</div>
-              <div className="text-gray-600">Years Experience</div>
-            </div>
-          </div>
+          <motion.div 
+            className="grid grid-cols-2 md:grid-cols-4 gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {[
+              { number: '500+', label: 'Projects Completed' },
+              { number: '200+', label: 'Happy Clients' },
+              { number: '1M+', label: 'Items Printed' },
+              { number: '10+', label: 'Years Experience' }
+            ].map((stat, index) => (
+              <motion.div key={index} className="text-center" variants={scaleIn}>
+                <motion.div 
+                  className="text-4xl font-bold text-turquoise-600 mb-2"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {stat.number}
+                </motion.div>
+                <div className="text-gray-600">{stat.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
       {/* Portfolio Grid */}
-      <section className="py-20 bg-gray-50">
+      <section className="section-padding bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Projects</h2>
+          <motion.div 
+            className="text-center mb-12"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 heading-uppercase">Featured Projects</h2>
             <p className="text-xl text-gray-600">A selection of our recent work</p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+          >
             {portfolioItems.map((item, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                className="group bg-white rounded-xl shadow-lg overflow-hidden"
+                variants={scaleIn}
+                whileHover={{ y: -12, transition: { duration: 0.3 } }}
               >
                 <div className={`h-48 bg-gradient-to-br ${item.color} flex items-center justify-center p-8`}>
                   <div className="text-center text-white">
-                    <div className="text-sm font-semibold mb-2 opacity-90">{item.category}</div>
+                    <div className="text-sm font-semibold mb-2 opacity-90 uppercase tracking-wide">{item.category}</div>
                     <h3 className="text-2xl font-bold">{item.title}</h3>
                   </div>
                 </div>
                 <div className="p-6">
                   <p className="text-gray-600">{item.description}</p>
-                  <div className="mt-4 flex items-center text-turquoise-600 font-semibold group-hover:text-turquoise-700 transition">
+                  <motion.div 
+                    className="mt-4 flex items-center text-turquoise-600 font-semibold"
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <span>View Details</span>
-                    <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                  </div>
+                  </motion.div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Client Testimonials */}
-      <section className="py-20 bg-white">
+      <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 heading-uppercase">What Our Clients Say</h2>
             <p className="text-xl text-gray-600">Don't just take our word for it</p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {[
               {
                 name: 'Sarah Mwangi',
@@ -146,7 +230,7 @@ export default function Portfolio() {
               {
                 name: 'James Ochieng',
                 role: 'Marketing Director',
-content: 'We\'ve been using MintPress for all our marketing materials for 3 years. Consistent quality and great customer service.',
+                content: 'We have been using MintPress for all our marketing materials for 3 years. Consistent quality and great customer service.',
                 rating: 5,
               },
               {
@@ -156,7 +240,13 @@ content: 'We\'ve been using MintPress for all our marketing materials for 3 year
                 rating: 5,
               },
             ].map((testimonial, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl p-8 shadow-md">
+              <motion.div 
+                key={index} 
+                className="bg-gray-50 rounded-xl p-8 shadow-md"
+                variants={scaleIn}
+                whileHover={{ y: -8 }}
+                transition={{ duration: 0.3 }}
+              >
                 <div className="flex mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
@@ -169,21 +259,33 @@ content: 'We\'ve been using MintPress for all our marketing materials for 3 year
                   <div className="font-bold text-gray-900">{testimonial.name}</div>
                   <div className="text-gray-500 text-sm">{testimonial.role}</div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Industry Sectors */}
-      <section className="py-20 bg-gray-50">
+      <section className="section-padding bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Industries We Serve</h2>
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 heading-uppercase">Industries We Serve</h2>
             <p className="text-xl text-gray-600">Trusted by diverse sectors</p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <motion.div 
+            className="grid grid-cols-2 md:grid-cols-4 gap-6"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {[
               { name: 'Education', icon: 'M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z' },
               { name: 'Healthcare', icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
@@ -194,34 +296,58 @@ content: 'We\'ve been using MintPress for all our marketing materials for 3 year
               { name: 'Publishing', icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253' },
               { name: 'Hospitality', icon: 'M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7' },
             ].map((industry, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 text-center hover:shadow-lg transition">
-                <svg className="w-12 h-12 text-turquoise-600 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <motion.div 
+                key={index} 
+                className="bg-white rounded-lg p-6 text-center"
+                variants={scaleIn}
+                whileHover={{ y: -8, scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.svg 
+                  className="w-12 h-12 text-turquoise-600 mx-auto mb-3" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.6 }}
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={industry.icon} />
-                </svg>
+                </motion.svg>
                 <h3 className="font-semibold text-gray-900">{industry.name}</h3>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-turquoise-600 to-turquoise-700">
+      {/* CTA */}
+      <motion.section 
+        className="section-padding bg-gradient-to-r from-turquoise-600 to-turquoise-700"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+      >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 heading-uppercase">
             Ready to start your project?
           </h2>
           <p className="text-xl text-turquoise-100 mb-8">
             Let's create something amazing together
           </p>
-          <Link
-            href="/contact"
-            className="inline-block bg-white text-turquoise-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition transform hover:scale-105"
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            Get Started Today
-          </Link>
+            <Link
+              href="/contact"
+              className="btn-premium inline-block bg-white text-turquoise-600 px-10 py-5 rounded-lg font-bold hover:bg-gray-100 transition text-lg uppercase tracking-wide"
+            >
+              Get Started Today
+            </Link>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
