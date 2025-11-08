@@ -51,12 +51,26 @@ export default function Contact() {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+  
+  try {
+    const response = await fetch('https://formspree.io/f/xwpwdwjo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        service: formData.service,
+        message: formData.message,
+      }),
+    });
+
+    if (response.ok) {
       setIsSubmitting(false);
       setSubmitStatus('success');
       setFormData({
@@ -66,10 +80,17 @@ export default function Contact() {
         service: '',
         message: '',
       });
-      
       setTimeout(() => setSubmitStatus('idle'), 5000);
-    }, 1500);
-  };
+    } else {
+      setIsSubmitting(false);
+      setSubmitStatus('error');
+    }
+  } catch (error) {
+    console.error('Form submission error:', error);
+    setIsSubmitting(false);
+    setSubmitStatus('error');
+  }
+};
 
   return (
     <div>

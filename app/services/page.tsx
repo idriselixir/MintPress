@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -134,22 +135,26 @@ export default function Services() {
             </motion.div>
             
             <motion.div 
-              className="bg-turquoise-50 rounded-xl p-12 flex items-center justify-center"
+              className="bg-turquoise-50 rounded-xl p-12 flex items-center justify-center overflow-hidden"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               variants={fadeInRight}
             >
-              <motion.svg 
-                className="w-full h-64 text-turquoise-600" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-                whileHover={{ scale: 1.1, rotate: 5 }}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.6 }}
+                className="w-full h-full"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </motion.svg>
+                <Image 
+                  src="https://images.unsplash.com/photo-1548745908-2315705892fb?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGJvb2slMjBwcmludGluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=900"
+                  alt="Book printing services"
+                  width={900}
+                  height={600}
+                  className="w-full h-auto rounded-lg object-cover"
+                  unoptimized
+                />
+              </motion.div>
             </motion.div>
           </div>
         </div>
