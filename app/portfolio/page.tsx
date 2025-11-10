@@ -129,7 +129,7 @@ export default function Portfolio() {
               { number: '500+', label: 'Projects Completed' },
               { number: '200+', label: 'Happy Clients' },
               { number: '1M+', label: 'Items Printed' },
-              { number: '10+', label: 'Years Experience' }
+              { number: '5+', label: 'Years Experience' }
             ].map((stat, index) => (
               <motion.div key={index} className="text-center" variants={scaleIn}>
                 <motion.div 

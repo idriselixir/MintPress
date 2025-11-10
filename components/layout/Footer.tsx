@@ -30,7 +30,7 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-bold mb-4">Contact</h3>
             <ul className="space-y-2 text-sm">
-              <li>+254 XXX XXX XXX</li>
+              <li>+254 723 331077</li>
               <li>info@mintpress.co.ke</li>
               <li>Nairobi, Kenya</li>
             </ul>

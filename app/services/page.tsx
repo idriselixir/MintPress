@@ -147,7 +147,7 @@ export default function Services() {
                 className="w-full h-full"
               >
                 <Image 
-                  src="https://images.unsplash.com/photo-1548745908-2315705892fb?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGJvb2slMjBwcmludGluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=900"
+                  src="/images/strive.jpeg"
                   alt="Book printing services"
                   width={900}
                   height={600}
@@ -165,22 +165,25 @@ export default function Services() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div 
-              className="bg-turquoise-50 rounded-xl p-12 flex items-center justify-center order-2 lg:order-1"
+              className="bg-turquoise-50 rounded-xl p-12 flex items-center justify-center overflow-hidden order-2 lg:order-1"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               variants={fadeInLeft}
             >
-              <motion.svg 
-                className="w-full h-64 text-turquoise-600" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-                whileHover={{ scale: 1.1, rotate: -5 }}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.6 }}
+                className="w-full h-full"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-              </motion.svg>
+                <Image
+                  src="/images/graphicimage.jpg"
+                  alt="Graphic design example"
+                  width={900}
+                  height={40}
+                  className="w-full h-auto rounded-lg object-cover"
+                />
+              </motion.div>
             </motion.div>
             
             <motion.div 
@@ -294,22 +297,25 @@ export default function Services() {
             </motion.div>
             
             <motion.div 
-              className="bg-turquoise-50 rounded-xl p-12 flex items-center justify-center"
+              className="bg-turquoise-50 rounded-xl p-12 flex items-center justify-center overflow-hidden"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               variants={fadeInRight}
             >
-              <motion.svg 
-                className="w-full h-64 text-turquoise-600" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-                whileHover={{ scale: 1.1, rotate: 5 }}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.6 }}
+                className="w-full h-full"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-              </motion.svg>
+                <Image
+                  src="/images/graphic.jpg"
+                  alt="Commercial printing services"
+                  width={900}
+                  height={600}
+                  className="w-full h-auto rounded-lg object-cover"
+                />
+              </motion.div>
             </motion.div>
           </div>
         </div>

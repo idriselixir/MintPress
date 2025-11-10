@@ -265,7 +265,7 @@ export default function Home() {
             viewport={{ once: true, margin: "-50px" }}
           >
             {[
-              { stat: '10+', label: 'Years Experience', desc: 'Trusted by thousands of clients' },
+              { stat: '5+', label: 'Years Experience', desc: 'Trusted by thousands of clients' },
               { stat: '24h', label: 'Fast Turnaround', desc: 'Quick delivery without compromise' },
               { stat: '100%', label: 'Quality Guaranteed', desc: 'Premium materials and finishes' },
               { stat: '24/7', label: 'Customer Support', desc: 'Always here to help you' },
